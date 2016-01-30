@@ -14,12 +14,12 @@
         <ViewModels:NotifyViewModel/>
     </UserControl.DataContext>
     <Grid>
-        <Taskbar:TaskbarIcon Visibility="Visible" IconSource="/SmokeMusic.Modules.Notify;component/Images/icon.ico">
+        <!--<Taskbar:TaskbarIcon Visibility="Visible" IconSource="/SmokeMusic.Modules.Notify;component/Images/icon.ico">
             <i:Interaction.Triggers>
                 <prism:InteractionRequestTrigger SourceObject="{Binding ShowErrorRequest}">
                     <Triggers:ShowErrorTrigger/>
                 </prism:InteractionRequestTrigger>
             </i:Interaction.Triggers>
-        </Taskbar:TaskbarIcon>
+        </Taskbar:TaskbarIcon>-->
     </Grid>
 </UserControl>

@@ -1,7 +1,0 @@
-C:\Users\harrieth\Desktop\SmokeMusic\SmokeMusic.Logic\bin\Debug\SmokeMusic.Logic.dll
-C:\Users\harrieth\Desktop\SmokeMusic\SmokeMusic.Logic\bin\Debug\SmokeMusic.Logic.pdb
-C:\Users\harrieth\Desktop\SmokeMusic\SmokeMusic.Logic\bin\Debug\Framework.Common.dll
-C:\Users\harrieth\Desktop\SmokeMusic\SmokeMusic.Logic\bin\Debug\Framework.Common.pdb
-C:\Users\harrieth\Desktop\SmokeMusic\SmokeMusic.Logic\obj\Debug\SmokeMusic.Logic.csprojResolveAssemblyReference.cache
-C:\Users\harrieth\Desktop\SmokeMusic\SmokeMusic.Logic\obj\Debug\SmokeMusic.Logic.dll
-C:\Users\harrieth\Desktop\SmokeMusic\SmokeMusic.Logic\obj\Debug\SmokeMusic.Logic.pdb
