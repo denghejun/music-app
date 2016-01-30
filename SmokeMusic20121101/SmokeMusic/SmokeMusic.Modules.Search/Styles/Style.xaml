@@ -1,0 +1,180 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="ChannelSearchItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="{Binding (ItemsControl.AlternationIndex), Converter={StaticResource AlternationConverter}, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Grid x:Name="grid" Background="{TemplateBinding Background}" RenderTransformOrigin="0.5,0.5">
+                        <Grid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Grid.RenderTransform>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard PresentationOptions:Freeze="True">
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="CbFavorite">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="OpacityMask.(LinearGradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="CbFavorite">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="OpacityMask.(LinearGradientBrush.GradientStops)[2].(GradientStop.Offset)" Storyboard.TargetName="CbFavorite">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard PresentationOptions:Freeze="True">
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1.1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1.1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="CbFavorite" BeginTime="0:0:1">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="OpacityMask.(LinearGradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="CbFavorite" BeginTime="0:0:1">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseOut"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="OpacityMask.(LinearGradientBrush.GradientStops)[2].(GradientStop.Offset)" Storyboard.TargetName="CbFavorite" BeginTime="0:0:1">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <CircleEase EasingMode="EaseOut"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected"/>
+                                <VisualState x:Name="Selected">
+                                    <Storyboard AutoReverse="True" RepeatBehavior="Forever" PresentationOptions:Freeze="True">
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" Storyboard.TargetName="border1">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#7FFFFFFF"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="SelectedUnfocused">
+                                    <Storyboard AutoReverse="True" RepeatBehavior="Forever" PresentationOptions:Freeze="True">
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" Storyboard.TargetName="border1">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#7FFFFFFF"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="ValidationStates">
+                                <VisualState x:Name="Valid"/>
+                                <VisualState x:Name="InvalidFocused"/>
+                                <VisualState x:Name="InvalidUnfocused"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter x:Name="contentPresenter" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Border x:Name="border1" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="Transparent"/>
+                        <CheckBox x:Name="CbFavorite" Width="16" Height="32" Margin="0,-2,16,0" HorizontalAlignment="Right" VerticalAlignment="Top" Opacity="0" Style="{StaticResource FavoriteStyle}">
+                            <CheckBox.OpacityMask>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Offset="0" Color="White"/>
+                                    <GradientStop Offset="0" Color="White"/>
+                                    <GradientStop Offset="0" Color="Transparent"/>
+                                    <GradientStop Offset="1" Color="Transparent"/>
+                                </LinearGradientBrush>
+                            </CheckBox.OpacityMask>
+                        </CheckBox>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Panel.ZIndex" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="BorderThickness" Value="5"/>
+    </Style>
+    <Style x:Key="SearchResultListStyle" TargetType="{x:Type ListBox}">
+        <Setter Property="Background" Value="#7F000000"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ChannelSearchItemStyle}"/>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid Height="70" Width="225">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Viewbox Width="70">
+                            <Image Source="{Binding Picture}"/>
+                        </Viewbox>
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Foreground="White" Text="{Binding Title}" MaxHeight="50" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Margin="0,0,20,0" VerticalAlignment="Center" Foreground="White"><Run Text="艺术家"/></TextBlock>
+                                <TextBlock Margin="0,0,20,0" VerticalAlignment="Center" Foreground="White"><Run Text="收听"/></TextBlock>
+                                <Button x:Name="Link" BorderThickness="1" Padding="0" Tag="{Binding Link, Mode=OneWay}" Content="资料"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="AlternationCount" Value="12"/>
+    </Style>
+    <Style x:Key="PreviousPageStyle" BasedOn="{StaticResource CustomButtonStyle}" TargetType="{x:Type Button}">
+        <Setter Property="ToolTip" Value="上一页"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Viewbox>
+                        <Canvas Width="256" Height="128" Clip="F1 M 0,0L 256,0L 256,128L 0,128L 0,0" Background="{TemplateBinding Background}">
+                            <Path Width="224" Height="96" Canvas.Left="16" Canvas.Top="16" Stretch="Fill" Fill="{TemplateBinding Foreground}" Data="F1 M 16,64L 99.1384,16L 99.1384,40L 240,40L 240,88L 99.1384,88L 99.1384,112L 16,64 Z "/>
+                        </Canvas>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="NextPageStyle" BasedOn="{StaticResource CustomButtonStyle}" TargetType="{x:Type Button}">
+        <Setter Property="ToolTip" Value="下一页"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Viewbox>
+                        <Canvas Width="256" Height="128" Clip="F1 M 0,0L 256,0L 256,128L 0,128L 0,0" Background="{TemplateBinding Background}">
+                            <Path Width="224" Height="96" Canvas.Left="16" Canvas.Top="16" Stretch="Fill" Fill="{TemplateBinding Foreground}" Data="F1 M 240,64L 156.862,112L 156.862,88L 16,88L 16,40L 156.862,40L 156.862,16L 240,64 Z "/>
+                        </Canvas>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,51 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:CommonConverter="clr-namespace:SmokeMusic.Common.Converters;assembly=SmokeMusic.Common"
+             xmlns:ViewModels="clr-namespace:SmokeMusic.Modules.Search.ViewModels" x:Class="SmokeMusic.Modules.Search.Views.Search" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SmokeMusic.Modules.Search;component/Styles/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <CommonConverter:OppositeConverter x:Key="OppositeConverter"/>
+            <CommonConverter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <ViewModels:SearchViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="10" Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding Keywords}" IsEnabled="{Binding IsLoading, Converter={StaticResource OppositeConverter}}" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
+            <Button Grid.Column="1" Margin="10,0,0,0" IsDefault="True" IsEnabled="{Binding IsLoading, Converter={StaticResource OppositeConverter}}" Style="{DynamicResource SearchStyle}" Command="{Binding SearchCommand}"/>
+        </Grid>
+        <ListBox Grid.Row="1" Style="{DynamicResource SearchResultListStyle}" ItemsSource="{Binding SearchResultList}" SelectedItem="{Binding CurrentResult}" />
+        <Label Grid.Row="1" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Content="正在搜索..."/>
+        <StackPanel Grid.Row="1" Visibility="Collapsed" Height="Auto" VerticalAlignment="Center">
+            <Label HorizontalAlignment="Center" Content="搜索结果与music.douban.com保持一致"/>
+            <StackPanel Visibility="{Binding Settings.IsSearchFilterEnabled}">
+                <Label HorizontalAlignment="Center" Content="您开启了自动剔除无法收听的项目"/>
+                <Label HorizontalAlignment="Center" Content="可能下一页就会有结果哦"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal" Height="30">
+            <Button x:Name="PreviousPage" IsEnabled="{Binding ChannelSearch.IsPreviousPageEnabled}" Style="{DynamicResource PreviousPageStyle}"/>
+            <Border Width="20"/>
+            <Button x:Name="NextPage" IsEnabled="{Binding ChannelSearch.IsNextPageEnabled}" Style="{DynamicResource NextPageStyle}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
